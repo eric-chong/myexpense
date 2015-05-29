@@ -1,0 +1,75 @@
+<section ng-controller="AccountsController" ng-init="find()">
+  <div class="page-header">
+    <h3>My Accounts</h3>
+  </div>
+  <div class="list-group accounts-list">
+    <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
+      <li class="list-item account" ng-repeat="account in accounts">
+        <div class="overview" ng-show="!account.editMode">
+          <h5 class="list-group-item-heading">{{account.name}}</h5>
+          <div class="overview-charts">Charts-to-come</div>
+          <div class="actions" ng-show="!account.confirmDelete">
+            <a href class="button tiny" ng-click="viewExpense(account)">Expenses</a>
+            <a href class="button tiny" ng-click="account.editMode=!account.editMode">Edit</a>
+            <a href class="button tiny alert" ng-click="account.confirmDelete=!account.confirmDelete">Delete</a>
+          </div>
+          <div class="actions" ng-show="account.confirmDelete">
+            <a href class="button tiny alert" ng-click="remove(account)">Confrim Delete</a>
+            <a href ng-click="account.confirmDelete=!account.confirmDelete">Cancel</a>
+          </div>
+        </div>
+        <div ng-show="account.editMode">
+          <form ng-submit="save(account)">
+            <div class="row">
+              <div class="small-12 columns">
+                <label>Name
+                  <input type="text" placeholder="Name" ng-model="account.name" />
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="small-12 columns">
+                <label>Description
+                  <input type="text" placeholder="Description" ng-model="account.description" />
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="small-12 columns">
+                <input type="submit" class="button tiny" Value="Save" />
+                <a href ng-click="account.editMode=!account.editMode">Cancel</a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </li>
+      <li class="list-item new-account">
+        <form class="new-account-form" ng-submit="create()" ng-if="!!newAccount">
+          <div class="row">
+            <div class="small-12 columns">
+              <label>Name
+                <input type="text" placeholder="Name" ng-model="newAccount.name" />
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="small-12 columns">
+              <label>Description
+                <input type="text" placeholder="Description" ng-model="newAccount.description" />
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="small-12 columns">
+              <input type="submit" class="button tiny" Value="Create" />
+              <a href ng-click="cancelNewAccount()">Cancel</a>
+            </div>
+          </div>
+        </form>
+        <div class="add-account-btn" ng-if="!newAccount" ng-click="showNewAccountForm()">
+          <i class="fa fa-plus" />
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>

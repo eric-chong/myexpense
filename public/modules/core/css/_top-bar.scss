@@ -1,0 +1,22 @@
+.contain-to-grid {
+  background: transparent;
+  .top-bar {
+    background: $black-lighten-60;
+    .top-bar-section {
+      ul li {
+        background: $black-lighten-60;
+        &.active {
+          a, a:hover {
+            background: $black-lighten-10;
+          }
+        }
+        a {
+          background: $black-lighten-60;
+          &:hover {
+            background: $black-lighten-10;
+          }
+        }
+      }
+    }
+  }
+}

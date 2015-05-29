@@ -1,0 +1,51 @@
+.list-group.accounts-list {
+  ul {
+    li.list-item {
+      border: 1px solid $black-lighten-40;
+      border-radius: 5px;
+      height: 220px;
+      padding-top: 20px;
+      margin-right: 10px;
+      &.account {
+        .overview {      
+          text-align: center;
+          .overview-charts {
+            width: 100%;
+            height: 110px;
+          }
+          .actions {
+            margin-left: auto;
+            margin-right: auto;
+          }
+        }
+      }
+      &.new-account {
+        vertical-align: middle;
+        .add-account-btn {
+          border: 1px solid $black-lighten-40;
+          color: $black-lighten-40;
+          cursor: pointer;
+          margin-top: 60px;
+          margin-left: auto;
+          margin-right: auto;
+          width: 50px;
+          height: 50px;
+          font-size: 24px;
+          border-radius: 25px;
+          text-align: center;
+          &:hover {
+            border: 1px solid $green;
+            background: $green;
+            color: $white;
+          }
+          i {
+            margin-top: 12px;
+          }
+        }
+      }
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}

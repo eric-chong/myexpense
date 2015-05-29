@@ -1,20 +1,73 @@
+.contain-to-grid {
+  background: transparent; }
+  .contain-to-grid .top-bar {
+    background: #d7d7d7; }
+    .contain-to-grid .top-bar .top-bar-section ul li {
+      background: #d7d7d7; }
+      .contain-to-grid .top-bar .top-bar-section ul li.active a, .contain-to-grid .top-bar .top-bar-section ul li.active a:hover {
+        background: #575757; }
+      .contain-to-grid .top-bar .top-bar-section ul li a {
+        background: #d7d7d7; }
+        .contain-to-grid .top-bar .top-bar-section ul li a:hover {
+          background: #575757; }
+
+.list-group.accounts-list ul li.list-item {
+  border: 1px solid #a4a4a4;
+  border-radius: 5px;
+  height: 220px;
+  padding-top: 20px;
+  margin-right: 10px; }
+  .list-group.accounts-list ul li.list-item.account .overview {
+    text-align: center; }
+    .list-group.accounts-list ul li.list-item.account .overview .overview-charts {
+      width: 100%;
+      height: 110px; }
+    .list-group.accounts-list ul li.list-item.account .overview .actions {
+      margin-left: auto;
+      margin-right: auto; }
+  .list-group.accounts-list ul li.list-item.new-account {
+    vertical-align: middle; }
+    .list-group.accounts-list ul li.list-item.new-account .add-account-btn {
+      border: 1px solid #a4a4a4;
+      color: #a4a4a4;
+      cursor: pointer;
+      margin-top: 60px;
+      margin-left: auto;
+      margin-right: auto;
+      width: 50px;
+      height: 50px;
+      font-size: 24px;
+      border-radius: 25px;
+      text-align: center; }
+      .list-group.accounts-list ul li.list-item.new-account .add-account-btn:hover {
+        border: 1px solid #568A46;
+        background: #568A46;
+        color: #F0F0F0; }
+      .list-group.accounts-list ul li.list-item.new-account .add-account-btn i {
+        margin-top: 12px; }
+  .list-group.accounts-list ul li.list-item:last-child {
+    margin-right: 0; }
+
 .content {
-	margin-top: 50px;
-}
+  margin-top: 50px;
+  max-width: 62.5rem;
+  margin-left: auto;
+  margin-right: auto; }
+
 .undecorated-link:hover {
-	text-decoration: none;
-}
+  text-decoration: none; }
+
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-	display: none !important;
-}
+  display: none !important; }
+
 .ng-invalid.ng-dirty {
-	border-color: #FA787E;
-}
+  border-color: #FA787E; }
+
 .ng-valid.ng-dirty {
-	border-color: #78FA89;
-}
+  border-color: #78FA89; }
+
 .browsehappy.jumbotron.hide,
-body.ng-cloak
-{
-	display: block;
-}
+body.ng-cloak {
+  display: block; }
+
+/*# sourceMappingURL=core.css.map */
