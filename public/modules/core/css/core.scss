@@ -1,5 +1,6 @@
 @import "colors",
   "top-bar",
+  "buttons",
   "../../accounts/css/accounts";
 
 .content {
@@ -24,4 +25,7 @@
 body.ng-cloak
 {
 	display: block;
+}
+a {
+  font-size: 12px;
 }

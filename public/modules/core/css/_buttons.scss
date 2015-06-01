@@ -1,0 +1,11 @@
+button, .button {
+  border-radius: 5px;
+  &.tiny.round {
+    i.fa {
+      width: 11px;
+      height: 11px;
+    }
+    border-radius: 17px;
+    padding: 0.7rem;
+  }
+}
