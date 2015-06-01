@@ -1,8 +1,8 @@
 'use strict';
 
 // Accounts controller
-angular.module('accounts').controller('AccountsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Accounts',
-  function($scope, $stateParams, $location, Authentication, Accounts) {
+angular.module('accounts').controller('AccountsController', ['$scope', '$state', '$stateParams', '$location', 'Authentication', 'Accounts',
+  function($scope, $state, $stateParams, $location, Authentication, Accounts) {
     $scope.authentication = Authentication;
 
     // Create new Account
@@ -59,6 +59,9 @@ angular.module('accounts').controller('AccountsController', ['$scope', '$statePa
       }
     };
 
+    $scope.viewExpense = function(account) {
+      $state.go('listExpenses', {accountId: account._id});
+    };
 
     // Find a list of Accounts
     $scope.find = function() {
