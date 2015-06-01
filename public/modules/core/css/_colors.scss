@@ -30,6 +30,15 @@ $green-lighten-50: desaturate(lighten($green, 50), 5);
 $green-darken-10: darken($green, 10);
 $green-darken-20: darken($green, 20);
 
+$blue-lighten-10: desaturate(lighten($blue, 10), 5);
+$blue-lighten-20: desaturate(lighten($blue, 20), 5);
+$blue-lighten-30: desaturate(lighten($blue, 30), 5);
+$blue-lighten-40: desaturate(lighten($blue, 40), 5);
+$blue-lighten-50: desaturate(lighten($blue, 50), 5);
+// --
+$blue-darken-10: darken($blue, 10);
+$blue-darken-20: darken($blue, 20);
+
 $black-lighten-10: desaturate(lighten($black, 10), 5);
 $black-lighten-20: desaturate(lighten($black, 20), 5);
 $black-lighten-30: desaturate(lighten($black, 30), 5);

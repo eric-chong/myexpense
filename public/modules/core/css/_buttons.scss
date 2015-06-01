@@ -1,5 +1,24 @@
 button, .button {
   border-radius: 5px;
+  background-color: $blue;
+  border-color: $blue-darken-10;
+  &:hover {
+    background-color: $blue-darken-10;
+  }
+  &.alert {  
+    background-color: $orange;
+    border-color: $orange-darken-10;
+    &:hover {
+      background-color: $orange-darken-10;
+    }
+  }
+  &.success {  
+    background-color: $green;
+    border-color: $green-darken-10;
+    &:hover {
+      background-color: $green-darken-10;
+    }
+  }
   &.tiny.round {
     i.fa {
       width: 11px;
