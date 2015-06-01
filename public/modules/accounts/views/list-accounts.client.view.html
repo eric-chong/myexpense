@@ -9,13 +9,23 @@
           <h5 class="list-group-item-heading">{{account.name}}</h5>
           <div class="overview-charts">Charts-to-come</div>
           <div class="actions" ng-show="!account.confirmDelete">
-            <a href class="button tiny" ng-click="viewExpense(account)">Expenses</a>
-            <a href class="button tiny" ng-click="account.editMode=!account.editMode">Edit</a>
-            <a href class="button tiny alert" ng-click="account.confirmDelete=!account.confirmDelete">Delete</a>
+            <a href class="button tiny round" ng-click="viewExpense(account)">
+              <i class="fa fa-list"></i>
+            </a>
+            <a href class="button tiny round" ng-click="account.editMode=!account.editMode">
+              <i class="fa fa-pencil"></i>
+            </a>
+            <a href class="button tiny round alert" ng-click="account.confirmDelete=!account.confirmDelete">
+              <i class="fa fa-trash-o"></i>
+            </a>
           </div>
           <div class="actions" ng-show="account.confirmDelete">
-            <a href class="button tiny alert" ng-click="remove(account)">Confrim Delete</a>
-            <a href ng-click="account.confirmDelete=!account.confirmDelete">Cancel</a>
+            <a href class="button tiny round alert" ng-click="remove(account)">
+              <i class="fa fa-trash-o"></i>
+            </a>
+            <a href class="button secondary tiny round" ng-click="account.confirmDelete=!account.confirmDelete">
+              <i class="fa fa-undo"></i>
+            </a>
           </div>
         </div>
         <div ng-show="account.editMode">
@@ -36,8 +46,12 @@
             </div>
             <div class="row">
               <div class="small-12 columns">
-                <input type="submit" class="button tiny" Value="Save" />
-                <a href ng-click="account.editMode=!account.editMode">Cancel</a>
+                <button type="submit" class="button tiny round">
+                  <i class="fa fa-save"></i>
+                </button>
+                <a href class="button secondary tiny round" ng-click="account.editMode=!account.editMode">
+                  <i class="fa fa-undo"></i>
+                </a>
               </div>
             </div>
           </form>
