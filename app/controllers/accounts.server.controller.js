@@ -75,7 +75,6 @@ exports.delete = function(req, res) {
 exports.list = function(req, res) {
   Account.find({'owner': req.user}).sort('-created').populate('owner', 'displayName').exec(function(err, accounts) {
     if (err) {
-      console.log(err);
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
