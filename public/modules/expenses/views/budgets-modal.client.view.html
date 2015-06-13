@@ -1,0 +1,52 @@
+<div class="budget-modal" ng-init="initBudget()">
+  <div ng-if="message.no_budget">
+    <p>Setup budget now</p>
+  </div>
+  <div class="row budget-period">
+    <div class="small-12 columns">
+      <div class="budget-nav-wrapper">
+        <div class="previous-budget-period nav-button" ng-if="showPrevBtn()">
+          <i class="fa fa-angle-double-left"></i>
+        </div>
+        <div class="previous-budget-gap create-button" ng-if="showPrevGap()">
+          <i class="fa fa-plus-circle"></i>
+        </div>
+        <div class="period-wrapper">
+          <div class="period">
+            <ui-select class="start-year" ng-model="budget.viewModel.startYear" search-enabled="false" theme="select2">
+              <ui-select-match>{{$select.selected}}</ui-select-match>
+              <ui-select-choices repeat="year in years">{{year}}</ui-select-choices>
+            </ui-select>
+            <ui-select class="start-month" ng-model="budget.viewModel.startMonth" search-enabled="false" theme="select2">
+              <ui-select-match>{{$select.selected.display}}</ui-select-match>
+              <ui-select-choices repeat="month in months">{{month.display}}</ui-select-choices>
+            </ui-select>
+            to
+            <ui-select class="end-year" ng-model="budget.viewModel.endYear" search-enabled="false" theme="select2">
+              <ui-select-match>{{$select.selected}}</ui-select-match>
+              <ui-select-choices repeat="year in years">{{year}}</ui-select-choices>
+            </ui-select>      
+            <ui-select class="end-month" ng-model="budget.viewModel.endMonth" search-enabled="false" theme="select2">
+              <ui-select-match>{{$select.selected.display}}</ui-select-match>
+              <ui-select-choices repeat="month in months">{{month.display}}</ui-select-choices>
+            </ui-select>
+          </div>
+          <div class="actions">
+            <a href class="button tiny round" ng-click="saveBudget()"><i class="fa fa-save"></i></a>
+          </div>
+        </div>
+        <div class="previous-budget-gap create-button" ng-if="showNextGap()">
+          <i class="fa fa-plus-circle"></i>
+        </div>
+        <div class="previous-budget-period nav-button" ng-if="showNextBtn()">
+          <i class="fa fa-angle-double-right"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row current-budget-items">
+    <div class="small-12 columns">
+      Current Budget Items
+    </div>
+  </div>
+</div>

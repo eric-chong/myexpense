@@ -1,0 +1,29 @@
+.budget-modal {
+  .budget-period {
+    .budget-nav-wrapper{
+      display: inline-block;
+      border: 1px solid $black-lighten-60;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      .period-wrapper, .period, .nav-button, .create-button, .actions {
+        display: inline-block;
+      }
+      .period {
+        .ui-select-container {
+          display: inline-block;
+          .select2-choice {
+            height: auto;
+            line-height: 1rem;
+          }
+          li.ui-select-choices-group ul {
+            margin: 0;
+            font-size: 0.8rem;
+          }
+        }
+      }
+    }
+  }
+  .current-budget-items {
+    border: 1px solid $black-lighten-60;
+  }
+}

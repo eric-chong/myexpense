@@ -13,9 +13,7 @@ angular.module('accounts').controller('AccountsController', ['$scope', '$state',
         description: $scope.newAccount.description
       });
 
-      // Redirect after save
       account.$save(function(response) {
-        // $location.path('accounts/' + response._id);
         $scope.find();
 
         // Clear form fields
