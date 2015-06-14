@@ -1,12 +1,13 @@
 'use strict';
 
 // Expenses controller
-angular.module('expenses').controller('BudgetsController', ['$scope', '$stateParams', '$location', '$modal', '$modalInstance', 'Authentication', 'Budgets', 'BudgetUtil', 'account', 'budgets', 'currentBudgetIndex', 'budgetMonth', 'message',
-  function($scope, $stateParams, $location, $modal, $modalInstance, Authentication, Budgets, BudgetUtil, account, budgets, currentBudgetIndex, budgetMonth, message) {
+angular.module('expenses').controller('BudgetsController', ['$scope', '$stateParams', '$location', '$modal', '$modalInstance', 'Authentication', 'Budgets', 'BudgetItems', 'BudgetUtil', 'account', 'budgets', 'currentBudgetIndex', 'budgetMonth', 'message',
+  function($scope, $stateParams, $location, $modal, $modalInstance, Authentication, Budgets, BudgetItems, BudgetUtil, account, budgets, currentBudgetIndex, budgetMonth, message) {
     $scope.authentication = Authentication;
     
     $scope.message = message;
     $scope.budgets = budgets;
+    $scope.currentBudgetIndex = currentBudgetIndex;
 
     $scope.years = ['2010','2011','2012','2013','2014','2015','2016','2017'];
     $scope.months = [{value: '01', display: 'January'},
@@ -23,7 +24,7 @@ angular.module('expenses').controller('BudgetsController', ['$scope', '$statePar
       {value: '12', display: 'December'}];
 
     $scope.initBudget = function() {
-      if (message.no_budget) {
+      if (message && message.no_budget) {
         $scope.budget = new Budgets({
           accountId: account._id,
           startMonth: moment(budgetMonth, 'YYYY-MM').startOf('year').format('YYYY-MM'),
@@ -31,43 +32,69 @@ angular.module('expenses').controller('BudgetsController', ['$scope', '$statePar
           isNew: true
         });
         $scope.budgets.push($scope.budget);
-      } else if (!hasCurrentBudget()) {
+      } else if ($scope.currentBudgetIndex === -1) {
         $scope.budget = BudgetUtil.fillBudgetGapAt(account._id, $scope.budgets, budgetMonth);
       } else {
-        $scope.budget = $scope.budgets[currentBudgetIndex];
+        $scope.budget = $scope.budgets[$scope.currentBudgetIndex];
       }
       periodModelToViewModel($scope.budget);        
     };
 
     var hasCurrentBudget = function() {
-      return (currentBudgetIndex && currentBudgetIndex > -1 && currentBudgetIndex < $scope.budgets.length);
+      return ($scope.currentBudgetIndex && 
+        $scope.currentBudgetIndex > -1 && 
+        $scope.currentBudgetIndex < $scope.budgets.length);
     };
 
     $scope.showNextBtn = function() {
-      return _.indexOf($scope.budgets, $scope.budget) < $scope.budgets.length;
+      return BudgetUtil.getBudgetIndex($scope.budgets, $scope.budget) < $scope.budgets.length - 1;
     };
 
     $scope.showPrevBtn = function() {
-      return _.indexOf($scope.budgets, $scope.budget) > 0;
+      return BudgetUtil.getBudgetIndex($scope.budgets, $scope.budget) > 0;
     };
 
     $scope.showPrevGap = function() {
-      return true;
+      var prevMonth = moment($scope.budget.startMonth, 'YYYY-MM').subtract(1, 'month');
+      return !BudgetUtil.getBudgetInMonth($scope.budgets, prevMonth.format('YYYY-MM'));
     };
 
     $scope.showNextGap = function() {
-      return true;
+      var nextMonth = moment($scope.budget.endMonth, 'YYYY-MM').add(1, 'month');
+      return !BudgetUtil.getBudgetInMonth($scope.budgets, nextMonth.format('YYYY-MM'));
     };
 
     $scope.saveBudget = function() {
       periodViewModelToModel($scope.budget);
-      $scope.budget.$save(function(result) {
-        $scope.budgets = Budgets.query({
+      if ($scope.budget.isNew) {      
+        $scope.budget.$save({
           accountId: account._id
+        },
+        function(result) {
+          var budget = result;
+          $scope.budgets = Budgets.query({
+            accountId: account._id
+          }, function() {          
+            $scope.budget = BudgetUtil.getBudgetById($scope.budgets, budget._id);
+            $scope.currentBudgetIndex = BudgetUtil.getBudgetIndex($scope.budgets, $scope.budget);
+            periodModelToViewModel($scope.budget);
+          });
         });
-        $scope.budget = result;
-        periodModelToViewModel($scope.budget);
-      });
+      } else {
+        $scope.budget.$update({
+          accountId: account._id
+        },
+        function(result) {
+          var budget = result;
+          $scope.budgets = Budgets.query({
+            accountId: account._id
+          }, function() {          
+            $scope.budget = BudgetUtil.getBudgetById($scope.budgets, budget._id);
+            $scope.currentBudgetIndex = BudgetUtil.getBudgetIndex($scope.budgets, $scope.budget);
+            periodModelToViewModel($scope.budget);
+          });
+        });
+      }
     };
 
     var periodModelToViewModel = function(budget) {
@@ -85,5 +112,12 @@ angular.module('expenses').controller('BudgetsController', ['$scope', '$statePar
         budget.endMonth = budget.viewModel.endYear + '-' + budget.viewModel.endMonth.value;
       }
     };
+
+    $scope.$watch('budget', function(newBud) {
+      $scope.budgetItems = BudgetItems.query({
+        accountId: account._id,
+        budgetId: $scope.budget._id
+      });
+    });
   }
 ]);

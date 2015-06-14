@@ -14,11 +14,15 @@ var BudgetItemSchema = new Schema({
     type: Date,
     default: Date.now
   },
+  itemDate: {
+    type: Date,
+    default: Date.now
+  },
   name: {
     type: String,
     default: '',
     trim: true,
-    required: 'Account name cannot be blank'
+    required: 'Budget item name cannot be blank'
   },
   amount: {
     type: Number,

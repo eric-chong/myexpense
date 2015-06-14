@@ -63,7 +63,7 @@ angular.module('expenses').controller('ExpensesController', ['$scope', '$statePa
       return BudgetUtil.getBudgetInMonth($scope.budgets, $stateParams.expenseMonth);
     };
 
-    $scope.showBudgetNotFoundModal = function(message) {
+    $scope.showBudgetModal = function(message) {
       var modalInstance = $modal.open({
         templateUrl: 'modules/expenses/views/budgets-modal.client.view.html',
         controller: 'BudgetsController',
@@ -77,7 +77,7 @@ angular.module('expenses').controller('ExpensesController', ['$scope', '$statePa
             return $scope.budgets;
           },
           currentBudgetIndex: function() {
-            return _.indexOf($scope.budgets, getCurrentBudget());
+            return BudgetUtil.getBudgetIndex($scope.budgets, $scope.budget);
           },
           budgetMonth: function() {
             return $stateParams.expenseMonth || moment().format('YYYY-MM');
@@ -95,17 +95,19 @@ angular.module('expenses').controller('ExpensesController', ['$scope', '$statePa
 
     // Find a list of Expenses
     $scope.find = function() {
-      $scope.budget = Budgets.query({
+      $scope.budgets = Budgets.query({
         accountId: $stateParams.accountId
       }, function(budgets) {
-        $scope.budgets = budgets;
+        // $scope.budgets = budgets;
+        var now = moment();
+        var currentMonth = $stateParams.expenseMonth || now.format('YYYY-MM');
+        $scope.budget = BudgetUtil.getBudgetInMonth($scope.budgets, currentMonth);
         var message = {};
         message.no_budget = $scope.budgets.length === 0;
-        message.no_active_budget = !!getCurrentBudget();
-        if ( $scope.budgets.length === 0 || !getCurrentBudget() ) {
-          $scope.showBudgetNotFoundModal(message);
+        message.no_active_budget = !$scope.budget;
+        if (message.no_budget || message.no_active_budget) {
+          $scope.showBudgetModal(message);
         } else {
-          var now = moment();
           $scope.expenses = Expenses.queryForMonth({
             accountId: $stateParams.accountId,
             expenseMonth: $stateParams.expenseMonth || now.format('YYYY-MM')

@@ -15,6 +15,11 @@ angular.module('expenses').factory('BudgetUtil', ['Budgets',
           return now.isAfter(budgetStart) && (!budgetEnd || now.isBefore(budgetEnd));
         });
       },
+      getBudgetById: function(budgets, budgetId) {
+        return _.find(budgets, function(b) {
+          return b._id === budgetId;
+        });
+      },
       getBudgetIndex: function(budgets, budget) {
         return _.indexOf(budgets, budget);
       },

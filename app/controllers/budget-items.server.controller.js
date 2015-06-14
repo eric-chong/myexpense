@@ -5,124 +5,103 @@
  */
 var mongoose = require('mongoose'),
     errorHandler = require('./errors.server.controller'),
-    Budget = mongoose.model('Budget'),
+    BudgetItem = mongoose.model('BudgetItem'),
     _ = require('lodash');
 
 /**
- * Get budget of a specific month
- */
-exports.getByMonth = function(req, res) {
-  res.json(req.budget);
-};
-
-/**
- * Create a budget
+ * Create a budgetItem
  */
 exports.create = function(req, res) {
-    var budget = new Budget(req.body);
-    budget.owner = req.user;
+    var budgetItem = new BudgetItem(req.body);
 
-    budget.save(function(err) {
+    budgetItem.save(function(err) {
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
             });
         } else {
-            res.json(budget);
+            res.json(budgetItem);
         }
     });
 };
 
 /**
- * Show the current budget
+ * Show the current budgetItem
  */
 exports.read = function(req, res) {
-    res.json(req.budget);
+    res.json(req.budgetItem);
 };
 
 /**
- * Update a budget
+ * Update a budgetItem
  */
 exports.update = function(req, res) {
-    var budget = req.budget;
+    var budgetItem = req.budgetItem;
 
-    budget = _.extend(budget, req.body);
+    budgetItem = _.extend(budgetItem, req.body);
 
-    budget.save(function(err) {
+    budgetItem.save(function(err) {
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
             });
         } else {
-            res.json(budget);
+            res.json(budgetItem);
         }
     });
 };
 
 /**
- * Delete an budget
+ * Delete an budgetItem
  */
 exports.delete = function(req, res) {
-    var budget = req.budget;
+    var budgetItem = req.budgetItem;
 
-    budget.remove(function(err) {
+    budgetItem.remove(function(err) {
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
             });
         } else {
-            res.json(budget);
+            res.json(budgetItem);
         }
     });
 };
 
 /**
- * List of Budgets
+ * List of BudgetItems
  */
 exports.list = function(req, res) {
-  Budget.find().sort('startMonth').populate('owner', 'displayName').exec(function(err, budgets) {
+  BudgetItem.find().sort('itemDate').populate('budget').exec(function(err, budgetItems) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      res.json(budgets);
+      res.json(budgetItems);
     }
   });
 };
 
 /**
- * Budget middleware
+ * BudgetItem middleware
  */
-exports.budgetByID = function(req, res, next, id) {
+exports.budgetItemByID = function(req, res, next, id) {
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({
-      message: 'Budget is invalid'
+      message: 'BudgetItem is invalid'
     });
   }
 
-  Budget.findById(id).populate('account').exec(function(err, budget) {
+  BudgetItem.findById(id).populate('account').exec(function(err, budgetItem) {
     if (err) return next(err);
-    if (!budget) {
+    if (!budgetItem) {
       return res.status(404).send({
-        message: 'Budget not found'
+        message: 'BudgetItem not found'
       });
     }
-    req.budget = budget;
-    next();
-  });
-};
-
-exports.budgetByMonth = function(req, res, next, id) {
-  Budget.find({account: req.account}).populate('account').exec(function(err, budgets) {
-    if (err) return next(err);
-    
-    if (budgets && budgets.length === 0) {
-      return res.status(404).send({
-        message: 'Budget not found'
-      });
-    }
+    req.budgetItem = budgetItem;
     next();
   });
 };
@@ -131,7 +110,7 @@ exports.budgetByMonth = function(req, res, next, id) {
  * Budget authorization middleware
  */
 // exports.hasAuthorization = function(req, res, next) {
-//     if (req.budget.owner.id !== req.user.id) {
+//     if (req.budgetItem.owner.id !== req.user.id) {
 //         return res.status(403).send({
 //             message: 'User is not authorized'
 //         });
