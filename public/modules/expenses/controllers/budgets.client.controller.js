@@ -9,19 +9,8 @@ angular.module('expenses').controller('BudgetsController', ['$scope', '$statePar
     $scope.budgets = budgets;
     $scope.currentBudgetIndex = currentBudgetIndex;
 
-    $scope.years = ['2010','2011','2012','2013','2014','2015','2016','2017'];
-    $scope.months = [{value: '01', display: 'January'},
-      {value: '02', display: 'February'},
-      {value: '03', display: 'March'},
-      {value: '04', display: 'April'},
-      {value: '05', display: 'May'},
-      {value: '06', display: 'June'},
-      {value: '07', display: 'July'},
-      {value: '08', display: 'August'},
-      {value: '09', display: 'September'},
-      {value: '10', display: 'October'},
-      {value: '11', display: 'November'},
-      {value: '12', display: 'December'}];
+    $scope.years = BudgetUtil.getAvailableBudgetYears();
+    $scope.months = BudgetUtil.getAvailableBudgetMonths();
 
     $scope.initBudget = function() {
       if (message && message.no_budget) {

@@ -4,6 +4,25 @@
 angular.module('expenses').factory('BudgetUtil', ['Budgets',
   function(Budgets) {
     return {
+      getAvailableBudgetYears: function() {
+        return ['2010','2011','2012','2013','2014','2015','2016','2017'];
+      },
+      getAvailableBudgetMonths: function() {
+        return [
+          {value: '01', display: 'January'},
+          {value: '02', display: 'February'},
+          {value: '03', display: 'March'},
+          {value: '04', display: 'April'},
+          {value: '05', display: 'May'},
+          {value: '06', display: 'June'},
+          {value: '07', display: 'July'},
+          {value: '08', display: 'August'},
+          {value: '09', display: 'September'},
+          {value: '10', display: 'October'},
+          {value: '11', display: 'November'},
+          {value: '12', display: 'December'}
+        ];
+      },
       getBudgetInMonth: function(budgets, month) {
         var now = month ? moment(month, 'YYYY-MM') : moment();
         return _.find(budgets, function(b) {
