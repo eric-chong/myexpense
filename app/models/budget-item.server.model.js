@@ -14,10 +14,6 @@ var BudgetItemSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  itemDate: {
-    type: Date,
-    default: Date.now
-  },
   name: {
     type: String,
     default: '',

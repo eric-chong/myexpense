@@ -15,6 +15,12 @@ button, .button {
   border-radius: 5px;
   background-color: #0753A4;
   border-color: #053a73; }
+  button.reverse, .button.reverse {
+    background: #fff;
+    color: #0753A4;
+    border: 1px solid #0753A4; }
+    button.reverse:hover, .button.reverse:hover {
+      background: #F0F0F0; }
   button:hover, .button:hover {
     background-color: #053a73; }
   button.alert, .button.alert {
@@ -22,11 +28,23 @@ button, .button {
     border-color: #c13420; }
     button.alert:hover, .button.alert:hover {
       background-color: #c13420; }
+    button.alert.reverse, .button.alert.reverse {
+      background: #fff;
+      color: #DE4B36;
+      border: 1px solid #DE4B36; }
+      button.alert.reverse:hover, .button.alert.reverse:hover {
+        background: #F0F0F0; }
   button.success, .button.success {
     background-color: #568A46;
     border-color: #416835; }
     button.success:hover, .button.success:hover {
       background-color: #416835; }
+    button.success.reverse, .button.success.reverse {
+      background: #fff;
+      color: #568A46;
+      border: 1px solid #568A46; }
+      button.success.reverse:hover, .button.success.reverse:hover {
+        background: #F0F0F0; }
   button.tiny.round, .button.tiny.round {
     border-radius: 17px;
     padding: 0.7rem; }
@@ -606,23 +624,47 @@ disabled look for disabled choices in the results dropdown
     .list-group.accounts-list ul li.list-item:last-child {
       margin-right: 0; }
 
-.budget-modal .budget-period .budget-nav-wrapper {
-  display: inline-block;
-  border: 1px solid #d7d7d7;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px; }
-  .budget-modal .budget-period .budget-nav-wrapper .period-wrapper, .budget-modal .budget-period .budget-nav-wrapper .period, .budget-modal .budget-period .budget-nav-wrapper .nav-button, .budget-modal .budget-period .budget-nav-wrapper .create-button, .budget-modal .budget-period .budget-nav-wrapper .actions {
-    display: inline-block; }
-  .budget-modal .budget-period .budget-nav-wrapper .period .ui-select-container {
-    display: inline-block; }
-    .budget-modal .budget-period .budget-nav-wrapper .period .ui-select-container .select2-choice {
-      height: auto;
-      line-height: 1rem; }
-    .budget-modal .budget-period .budget-nav-wrapper .period .ui-select-container li.ui-select-choices-group ul {
-      margin: 0;
-      font-size: 0.8rem; }
-.budget-modal .current-budget-items {
-  border: 1px solid #d7d7d7; }
+.reveal-modal.budgets {
+  max-width: 650px; }
+
+.budget-modal {
+  max-width: 650px; }
+  .budget-modal .budget-period .budget-nav-wrapper {
+    display: inline-block;
+    color: #F0F0F0;
+    border: 1px solid #d7d7d7;
+    border-radius: 30px;
+    padding: 10px 25px;
+    margin-bottom: 5px;
+    background: #0753A4; }
+    .budget-modal .budget-period .budget-nav-wrapper .period-wrapper, .budget-modal .budget-period .budget-nav-wrapper .period, .budget-modal .budget-period .budget-nav-wrapper .nav-button, .budget-modal .budget-period .budget-nav-wrapper .create-button, .budget-modal .budget-period .budget-nav-wrapper .actions {
+      display: inline-block; }
+    .budget-modal .budget-period .budget-nav-wrapper .period .select2-container {
+      color: #575757; }
+    .budget-modal .budget-period .budget-nav-wrapper .period .ui-select-container {
+      display: inline-block;
+      margin-bottom: 0; }
+      .budget-modal .budget-period .budget-nav-wrapper .period .ui-select-container .select2-choice {
+        height: auto;
+        line-height: 1rem; }
+      .budget-modal .budget-period .budget-nav-wrapper .period .ui-select-container li.ui-select-choices-group ul {
+        margin: 0;
+        font-size: 0.8rem; }
+    .budget-modal .budget-period .budget-nav-wrapper a.button {
+      margin-bottom: 0; }
+  .budget-modal .current-budget-items {
+    border-bottom: 1px solid #f0f0f0; }
+    .budget-modal .current-budget-items .item-value {
+      margin-top: 10px; }
+  .budget-modal .current-budget-items, .budget-modal .new-budget-item {
+    font-size: 0.9rem;
+    color: #575757;
+    padding-top: 10px;
+    padding-bottom: 10px; }
+    .budget-modal .current-budget-items input, .budget-modal .new-budget-item input {
+      margin-bottom: 0; }
+    .budget-modal .current-budget-items a.button, .budget-modal .new-budget-item a.button {
+      margin-bottom: 0; }
 
 .content {
   margin-top: 50px;

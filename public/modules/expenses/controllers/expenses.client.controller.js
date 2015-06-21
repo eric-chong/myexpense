@@ -67,6 +67,7 @@ angular.module('expenses').controller('ExpensesController', ['$scope', '$statePa
       var modalInstance = $modal.open({
         templateUrl: 'modules/expenses/views/budgets-modal.client.view.html',
         controller: 'BudgetsController',
+        windowClass: 'budgets',
         backdrop: 'static',
         keyboard: false,
         resolve: {

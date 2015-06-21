@@ -2,6 +2,14 @@ button, .button {
   border-radius: 5px;
   background-color: $blue;
   border-color: $blue-darken-10;
+  &.reverse {
+    background: $solid-white;
+    color: $blue;
+    border: 1px solid $blue;
+    &:hover {
+      background: $white;
+    }
+  }
   &:hover {
     background-color: $blue-darken-10;
   }
@@ -11,12 +19,28 @@ button, .button {
     &:hover {
       background-color: $orange-darken-10;
     }
+    &.reverse {
+      background: $solid-white;
+      color: $orange;
+      border: 1px solid $orange;
+      &:hover {
+        background: $white;
+      }
+    }
   }
   &.success {  
     background-color: $green;
     border-color: $green-darken-10;
     &:hover {
       background-color: $green-darken-10;
+    }
+    &.reverse {
+      background: $solid-white;
+      color: $green;
+      border: 1px solid $green;
+      &:hover {
+        background: $white;
+      }
     }
   }
   &.tiny.round {

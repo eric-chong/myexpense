@@ -103,10 +103,63 @@ angular.module('expenses').controller('BudgetsController', ['$scope', '$statePar
     };
 
     $scope.$watch('budget', function(newBud) {
-      $scope.budgetItems = BudgetItems.query({
+      BudgetItems.query({
         accountId: account._id,
         budgetId: $scope.budget._id
+      }, function(items) {
+        $scope.budgetItems = items;
+        _.each($scope.budgetItems, function(item) {
+          item.prevValues = {
+            name: item.name,
+            amount: item.amount
+          };
+        });
       });
     });
+
+    $scope.newBudgetItem = {};
+
+    $scope.saveBudgetItem = function(item) {
+      if (!_.isNaN(Number(item.amount))) {      
+        item.$update({
+          accountId: account._id,
+          budgetId: $scope.budget._id
+        },function() {
+          item.editMode = false;
+          item.prevValues = {
+            name: item.name,
+            amount: item.amount
+          };
+        }, function(errorResponse) {
+          $scope.error = errorResponse.data.message;
+        });
+      }
+    };
+
+    $scope.cancelEditItem = function(item) {
+      item.name = item.prevValues.name;
+      item.amount = item.prevValues.amount;
+      item.editMode = false;
+    };
+
+    $scope.saveNewBudgetItem = function() {
+      if (!_.isNaN(Number($scope.newBudgetItem.amount))) {      
+        var newBudgetItem = new BudgetItems({
+          accountId: account._id,
+          budgetId: $scope.budget._id,
+          name: $scope.newBudgetItem.name,
+          amount: Number($scope.newBudgetItem.amount)
+        });
+
+        newBudgetItem.$save(function(newBudgetItem) {
+          $scope.budgetItems.push(newBudgetItem);
+
+          // Clear form fields
+          $scope.newBudgetItem = {};
+        }, function(errorResponse) {
+          $scope.error = errorResponse.data.message;
+        });
+      }
+    };
   }
 ]);

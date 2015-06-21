@@ -6,10 +6,12 @@
     <div class="small-12 columns">
       <div class="budget-nav-wrapper">
         <div class="previous-budget-period nav-button" ng-if="showPrevBtn()">
-          <i class="fa fa-angle-double-left"></i>
+          <i class="fa fa-angle-double-left" ng-click="gotoPrevBudget()"></i>
         </div>
         <div class="previous-budget-gap create-button" ng-if="showPrevGap()">
-          <i class="fa fa-plus-circle"></i>
+          <a href class="button tiny round reverse success" ng-click="createPrevBudget()">
+            <i class="fa fa-plus"></i>
+          </a>
         </div>
         <div class="period-wrapper">
           <div class="period">
@@ -32,21 +34,50 @@
             </ui-select>
           </div>
           <div class="actions">
-            <a href class="button tiny round" ng-click="saveBudget()"><i class="fa fa-save"></i></a>
+            <a href class="button tiny round reverse" ng-click="saveBudget()"><i class="fa fa-save"></i></a>
           </div>
         </div>
         <div class="previous-budget-gap create-button" ng-if="showNextGap()">
-          <i class="fa fa-plus-circle"></i>
+          <a href class="button tiny round reverse success" ng-click="createNextBudget()">
+            <i class="fa fa-plus"></i>
+          </a>
         </div>
         <div class="previous-budget-period nav-button" ng-if="showNextBtn()">
-          <i class="fa fa-angle-double-right"></i>
+          <i class="fa fa-angle-double-right" ng-click="gotoNextBudget()"></i>
         </div>
       </div>
     </div>
   </div>
-  <div class="row current-budget-items">
-    <div class="small-12 columns">
-      Current Budget Items
+  <div class="row current-budget-items" ng-repeat="item in budgetItems">
+    <div ng-if="item.editMode">
+      <div class="small-5 columns">
+        <input type="text" ng-model="item.name" placeholder="Item Name (e.g. Grocery)" ng-required/>
+      </div>
+      <div class="small-4 columns">
+        <input type="text" ng-model="item.amount" placeholder="Amount" ng-required/>
+      </div>    
+      <div class="small-3 columns">
+        <a href class="button tiny round" ng-click="saveBudgetItem(item)"><i class="fa fa-save"></i></a>
+        <a href class="button secondary tiny round" ng-click="cancelEditItem(item)"><i class="fa fa-undo"></i></a>
+      </div>    
     </div>
+    <div ng-if="!item.editMode">
+      <div class="small-5 columns item-value">{{item.name}}</div>
+      <div class="small-4 columns item-value">{{item.amount}}</div>
+      <div class="small-3 columns">
+        <a href class="button tiny round" ng-click="item.editMode=!item.editMode"><i class="fa fa-pencil"></i></a>
+      </div>    
+    </div>    
+  </div>
+  <div class="row new-budget-item">
+    <div class="small-5 columns">
+      <input type="text" ng-model="newBudgetItem.name" placeholder="Item Name (e.g. Grocery)" ng-required/>
+    </div>
+    <div class="small-4 columns">
+      <input type="text" ng-model="newBudgetItem.amount" placeholder="Amount" ng-required/>
+    </div>    
+    <div class="small-3 columns">
+      <a href class="button tiny round success" ng-click="saveNewBudgetItem()"><i class="fa fa-plus"></i></a>
+    </div>    
   </div>
 </div>

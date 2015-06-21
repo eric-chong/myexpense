@@ -1,16 +1,27 @@
+.reveal-modal.budgets {
+  max-width: 650px;
+}
 .budget-modal {
+  max-width: 650px;
   .budget-period {
     .budget-nav-wrapper{
       display: inline-block;
+      color: $white;
       border: 1px solid $black-lighten-60;
-      border-top-left-radius: 5px;
-      border-top-right-radius: 5px;
+      border-radius: 30px;
+      padding: 10px 25px;
+      margin-bottom: 5px;
+      background: $blue;
       .period-wrapper, .period, .nav-button, .create-button, .actions {
         display: inline-block;
       }
       .period {
+        .select2-container {
+          color: $black-lighten-10;
+        }
         .ui-select-container {
           display: inline-block;
+          margin-bottom: 0;
           .select2-choice {
             height: auto;
             line-height: 1rem;
@@ -21,9 +32,27 @@
           }
         }
       }
+      a.button {
+        margin-bottom: 0;
+      }
     }
   }
   .current-budget-items {
-    border: 1px solid $black-lighten-60;
+    border-bottom: 1px solid $black-lighten-70;
+    .item-value {
+      margin-top: 10px;
+    }
+  }
+  .current-budget-items, .new-budget-item {
+    font-size: 0.9rem;
+    color: $black-lighten-10;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    input {
+      margin-bottom: 0;
+    }
+    a.button {
+      margin-bottom: 0;
+    }
   }
 }

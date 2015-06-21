@@ -72,7 +72,7 @@ exports.delete = function(req, res) {
  * List of BudgetItems
  */
 exports.list = function(req, res) {
-  BudgetItem.find().sort('itemDate').populate('budget').exec(function(err, budgetItems) {
+  BudgetItem.find().sort('name').populate('budget').exec(function(err, budgetItems) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
