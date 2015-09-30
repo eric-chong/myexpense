@@ -7,7 +7,19 @@
       <a href ng-click="showBudgetModal()"><i class="fa fa-tasks"></i></a>
     </div>
   </div>
-  <div class="list-group accounts-list">
+  <div class="list-group expenses-list">
     <pre>{{expenses|json}}</pre>
+    <div class="row expense-items" ng-repeat="item in expenses">
+      <div class="small-4">date</div>
+      <div class="small-3">amount</div>
+      <div class="small-3">budget item</div>
+      <div class="small-2">actions buttons</div>
+    </div>
+    <div class="row new-expense-item">
+      <div class="small-4">date</div>
+      <div class="small-3">amount</div>
+      <div class="small-3">budget item</div>
+      <div class="small-2">actions buttons</div>      
+    </div>
   </div>
 </section>

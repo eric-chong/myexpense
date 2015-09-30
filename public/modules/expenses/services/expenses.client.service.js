@@ -12,7 +12,7 @@ angular.module('expenses').factory('Expenses', ['$resource',
       },
       queryForMonth: {
         method: 'GET',
-        url: 'accounts/:accountId/expenses/:expenseMonth',
+        url: 'accounts/:accountId/expenses?expenseMonth=:expenseMonth',
         isArray: true
       }
     });
